@@ -40,26 +40,10 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
-            // Connect to server-side login
-            try {
-                const response = await fetch('/api/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password })
-                });
-                
-                const data = await response.json();
-                
-                if (data.success) {
-                    localStorage.setItem('user', data.username);
-                    window.location.href = 'index.html';
-                } else {
-                    const errorMsg = document.getElementById('errorMsg');
-                    errorMsg.textContent = data.message || 'Login failed';
-                    errorMsg.style.display = 'block';
-                }
-            } catch (err) {
-                console.error('Login error:', err);
+            // Simple simulated login
+            if (username && password) {
+                localStorage.setItem('user', username);
+                window.location.href = 'index.html';
             }
         });
     </script>

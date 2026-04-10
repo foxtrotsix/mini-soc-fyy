@@ -60,7 +60,7 @@
         // Set user name
         const user = localStorage.getItem('user');
         if (!user) window.location.href = 'login.html';
-        document.getElementById('userNameDisplay').innerHTML = `Welcome, ${user}`;
+        document.getElementById('userNameDisplay').textContent = `Welcome, ${user}`;
     </script>
 </body>
 </html>
