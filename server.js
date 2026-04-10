@@ -15,14 +15,35 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-// Simple Login Logic (Simulated)
+// Mock Database (In-Memory for SOC simulation)
+const usersDB = [
+    { id: 1, username: 'admin', password: 'SuperSecretPassword2026', role: 'Administrator' },
+    { id: 2, username: 'ceo_gourmet', password: 'MillionDollarPassword!', role: 'CEO' },
+    { id: 3, username: 'staff_kitchen', password: 'password123', role: 'Staff' }
+];
+
+// Vulnerable Login Logic (Simulated SQL Injection)
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
-    // For this simple demo, any username/password works
-    if (username && password) {
-        res.json({ success: true, message: 'Login successful' });
+    
+    // INTENTIONALLY VULNERABLE: Simulated SQLi via flexible search.
+    // An attacker can use: ' OR '1'='1 to bypass.
+    const user = usersDB.find(u => {
+        // This logic mimics a poorly written SQL query where OR logic can be injected
+        const query = `username === '${username}' && password === '${password}'`;
+        
+        // Using a simple regex/string trick to simulate OR bypass
+        if (username.includes("' OR '1'='1") || password.includes("' OR '1'='1")) {
+            return true; // Bypass triggered
+        }
+        
+        return u.username === username && u.password === password;
+    });
+
+    if (user) {
+        res.json({ success: true, message: 'Login successful', username: user.username, role: user.role });
     } else {
-        res.status(400).json({ success: false, message: 'Username and password required' });
+        res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
 });
 
