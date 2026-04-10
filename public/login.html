@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GourmetHub | Login</title>
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .login-container {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('img/bg.png');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card glass">
+            <h2>GourmetHub</h2>
+            <p style="color: var(--text-dim); margin-bottom: 30px;">Experience culinary excellence delivered to your door.</p>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter your username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Sign In</button>
+            </form>
+            <p id="errorMsg" style="color: var(--accent); margin-top: 15px; font-size: 0.85rem; display: none;"></p>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple simulated login
+            if (username && password) {
+                localStorage.setItem('user', username);
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
