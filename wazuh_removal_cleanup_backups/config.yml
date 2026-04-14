@@ -1,0 +1,18 @@
+tunnel: f9109f3a-c2a8-4049-b8a4-83e87e21890f
+credentials-file: /etc/cloudflared/f9109f3a-c2a8-4049-b8a4-83e87e21890f.json
+
+ingress:
+  # Dashboard Wazuh
+  - hostname: wazuh.yuan-albyan.my.id
+    service: https://wazuh-dashboard:5601
+    originRequest:
+      noTLSVerify: true
+      proxyTimeout: 120s
+  
+  # Web App Nginx
+  - hostname: app.yuan-albyan.my.id
+    service: http://nginx:80
+    originRequest:
+      proxyTimeout: 120s
+
+  - service: http_status:404

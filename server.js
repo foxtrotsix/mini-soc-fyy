@@ -33,10 +33,8 @@ app.post('/api/order', (req, res) => {
     res.json({ success: true, message: 'Order placed successfully!', orderId: Math.floor(Math.random() * 100000) });
 });
 
-if (process.env.NODE_ENV !== 'production') {
-    app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
-    });
-}
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 
 module.exports = app;
