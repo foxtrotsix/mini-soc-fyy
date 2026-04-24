@@ -2,13 +2,13 @@
 
 :root {
     --bg-color: #050505;
-    --card-bg: rgba(20, 20, 20, 0.7);
+    --card-bg: rgba(25, 25, 25, 0.85);
     --primary: #00f2ff;
     --secondary: #7000ff;
     --accent: #ff007a;
     --text-main: #ffffff;
-    --text-dim: #a0a0a0;
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-dim: #d1d1d1;
+    --glass-border: rgba(255, 255, 255, 0.15);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -28,22 +28,25 @@ body {
 
 h1, h2, h3 {
     font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.02em;
+    font-weight: 700;
 }
 
 /* Glassmorphism Styles */
 .glass {
     background: var(--card-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 /* Button UI */
 .btn {
     padding: 12px 24px;
     border-radius: 12px;
-    border: none;
+    border: 1px solid transparent;
     cursor: pointer;
     font-weight: 600;
     transition: var(--transition);
@@ -53,6 +56,22 @@ h1, h2, h3 {
     gap: 8px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    color: white !important;
+    background: rgba(255, 255, 255, 0.03);
+    font-size: 0.85rem;
+}
+
+.btn.glass:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn.glass.active {
+    background: rgba(0, 242, 255, 0.1);
+    border-color: var(--primary);
+    color: var(--primary);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
 }
 
 .btn-primary {
@@ -87,6 +106,7 @@ h1, h2, h3 {
     margin-bottom: 30px;
     background: linear-gradient(to right, var(--primary), var(--secondary));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -130,12 +150,15 @@ h1, h2, h3 {
 }
 
 .logo {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 800;
-    letter-spacing: -1px;
-    background: linear-gradient(to right, var(--primary), var(--secondary));
+    letter-spacing: -1.5px;
+    background: linear-gradient(to right, #00f2ff, #7000ff);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.3));
+    user-select: none;
 }
 
 .container {
@@ -182,6 +205,8 @@ h1, h2, h3 {
     text-transform: uppercase;
     margin-bottom: 15px;
     display: block;
+    font-weight: 700;
+    letter-spacing: 0.05em;
 }
 
 /* Sidebar Cart */

@@ -54,7 +54,7 @@ async function loadCategories() {
         
         if (categoryList) {
             categoryList.innerHTML = data.categories.slice(0, 8).map(cat => `
-                <button class="btn glass" style="white-space: nowrap; ${cat.strCategory === 'Seafood' ? 'border-color: var(--primary);' : ''}" 
+                <button class="btn glass ${cat.strCategory === 'Seafood' ? 'active' : ''}" style="white-space: nowrap;" 
                         onclick="loadMeals('${cat.strCategory}', this)">
                     ${cat.strCategory}
                 </button>
@@ -71,8 +71,8 @@ async function loadCategories() {
 async function loadMeals(category, btn = null) {
     if (btn) {
         // Update active button state
-        document.querySelectorAll('#categoryList button').forEach(b => b.style.borderColor = '');
-        btn.style.borderColor = 'var(--primary)';
+        document.querySelectorAll('#categoryList button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
     }
 
     if (foodGrid) {
@@ -83,14 +83,14 @@ async function loadMeals(category, btn = null) {
             
             foodGrid.innerHTML = data.meals.map(meal => `
                 <div class="food-card glass">
-                    <img src="${meal.strMeal}" class="food-img" alt="${meal.strMeal}">
+                    <img src="${meal.strMealThumb}" class="food-img" alt="${meal.strMeal}">
                     <div class="food-info">
                         <span class="food-cat">${category}</span>
                         <h3 class="food-title">${meal.strMeal}</h3>
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <span style="font-weight: 700; color: var(--primary);">$${(Math.random() * 20 + 10).toFixed(2)}</span>
-                            <button class="btn btn-primary" style="padding: 8px 15px; font-size: 0.7rem;" 
-                                    onclick="addToCart('${meal.idMeal}', '${meal.strMeal.replace(/'/g, "\\'")}', '${meal.strMeal}')">
+                             <button class="btn btn-primary" style="padding: 8px 15px; font-size: 0.7rem;" 
+                                    onclick="addToCart('${meal.idMeal}', '${meal.strMeal.replace(/'/g, "\\'")}', '${meal.strMealThumb}')">
                                 Add to selection
                             </button>
                         </div>
